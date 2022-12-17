@@ -71,7 +71,7 @@
       "response": []
     },
     {
-      "name": "See all the comments",
+      "name": "See all comments",
       "event": [
         {
           "listen": "test",
