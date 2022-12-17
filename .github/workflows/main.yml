@@ -33,7 +33,7 @@ jobs:
       # Run the POSTMAN collection
       - name: Run POSTMAN collection
         run: |
-          newman run https://api.postman.com/collections/10199294-5b265fbc-74b0-4cd3-93a4-bf1e4045c83b?access_key=PMAT-01GMGANR2EZE68Y4AVB5ESH337 -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
+          newman run RoadToTriggeriseAPI.postman_collection.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
 
 
       # Upload the contents of Test Results directory to workspace
