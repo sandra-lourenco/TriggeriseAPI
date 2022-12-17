@@ -1,239 +1,220 @@
 {
-	"info": {
-		"_postman_id": "5b265fbc-74b0-4cd3-93a4-bf1e4045c83b",
-		"name": "RoadToTriggeriseAPI",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "10199294"
-	},
-	"item": [
-		{
-			"name": "Add a comment",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"//test success response",
-							"pm.test(\"Validate Status code and string\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
-							"    pm.response.to.have.status(\"Created\");",
-							"    pm.response.to.not.have.status(404);",
-							"    pm.response.to.not.have.status(400);",
-							"    pm.response.to.not.have.status(500);",
-							"});",
-							"",
-							"pm.test(\"Validate the info of the body\",() => {",
-							"  pm.expect(pm.response.text()).to.include(\"name\");",
-							"  pm.expect(pm.response.text()).to.include(\"email\");",
-							"  pm.expect(pm.response.text()).to.include(\"body\");",
-							"  pm.expect(pm.response.text()).to.include(\"Homer Simpson\");",
-							"  pm.expect(pm.response.text()).to.include(\"homer@test.com\");",
-							"  pm.expect(pm.response.text()).to.include(\"I need a beer\");",
-							"});",
-							"",
-							"//test correct data type",
-							"const jsonData = pm.response.json();",
-							"pm.test(\"Test data type of the response\", () => {",
-							"  pm.expect(jsonData).to.be.an(\"object\");",
-							"  pm.expect(jsonData.name).to.be.a(\"string\");",
-							"  pm.expect(jsonData.email).to.be.a(\"string\");",
-							"  pm.expect(jsonData.body).to.be.a(\"string\");",
-							"  pm.expect(jsonData.postId).to.be.a(\"string\");",
-							"  pm.expect(jsonData.id).to.be.a(\"number\");",
-							"});",
-							"",
-							"",
-							"",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "\n{\n    \"name\": \"Homer Simpson\",\n    \"email\": \"homer@test.com\",\n    \"body\": \"I need a beer\"\n  }\n\n  \n  ",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}posts/1/comments",
-					"host": [
-						"{{baseUrl}}posts"
-					],
-					"path": [
-						"1",
-						"comments"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "See the comments",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"//test success response",
-							"pm.test(\"Validate Status code and string\", function () {",
-							"    pm.response.to.have.status(200);",
-							"    pm.response.to.have.status(\"OK\");",
-							"    pm.response.to.not.have.status(404);",
-							"    pm.response.to.not.have.status(400);",
-							"    pm.response.to.not.have.status(500);",
-							"});",
-							"",
-							"//validate body information",
-							"pm.test(\"Validate the info of the body\",() => {",
-							"  pm.expect(pm.response.text()).to.include(\"name\");",
-							"  pm.expect(pm.response.text()).to.include(\"email\");",
-							"  pm.expect(pm.response.text()).to.include(\"body\");",
-							"  pm.expect(pm.response.text()).to.include(\"postId\");",
-							"  pm.expect(pm.response.text()).to.include(\"Id\");",
-							"});",
-							"",
-							"pm.test(\"Validate name in the response\",() => {",
-							"  pm.expect(pm.response.text()).to.include(\"id labore ex et quam laborum\");",
-							"  pm.expect(pm.response.text()).to.include(\"quo vero reiciendis velit similique earum\");",
-							"  pm.expect(pm.response.text()).to.include(\"odio adipisci rerum aut animi\");",
-							"  pm.expect(pm.response.text()).to.include(\"alias odio sit\");",
-							"  pm.expect(pm.response.text()).to.include(\"vero eaque aliquid doloribus et culpa\");",
-							"});",
-							"",
-							"pm.test(\"Validate email in the response\",() => {",
-							"  pm.expect(pm.response.text()).to.include(\"Eliseo@gardner.biz\");",
-							"  pm.expect(pm.response.text()).to.include(\"Jayne_Kuhic@sydney.com\");",
-							"  pm.expect(pm.response.text()).to.include(\"Nikita@garfield.biz\");",
-							"  pm.expect(pm.response.text()).to.include(\"Lew@alysha.tv\");",
-							"  pm.expect(pm.response.text()).to.include(\"Hayden@althea.biz\");",
-							"});",
-							"",
-							"pm.test(\"Validate body in the response\",() => {",
-							"  pm.expect(pm.response.text()).to.include(\"laudantium enim quasi est quidem magnam voluptate ipsam eos\");",
-							"  pm.expect(pm.response.text()).to.include(\"est natus enim nihil est dolore omnis voluptatem numquam\");",
-							"  pm.expect(pm.response.text()).to.include(\"quia molestiae reprehenderit quasi aspernatur\");",
-							"  pm.expect(pm.response.text()).to.include(\"non et atque\");",
-							"  pm.expect(pm.response.text()).to.include(\"harum non quasi et ratione\");",
-							"});",
-							"",
-							"",
-							"",
-							"",
-							"",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}posts/1/comments",
-					"host": [
-						"{{baseUrl}}posts"
-					],
-					"path": [
-						"1",
-						"comments"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete comment",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"//test success response",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"    pm.response.to.have.status(\"OK\");",
-							"    pm.response.to.not.have.status(404);",
-							"    pm.response.to.not.have.status(400);",
-							"    pm.response.to.not.have.status(500);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "  {\n        \"postId\": 2,\n        \"id\": 1,\n        \"name\": \"id labore ex et quam laborum\",\n        \"email\": \"Eliseo@gardner.biz\",\n        \"body\": \"laudantium enim quasi est quidem magnam voluptate ipsam eos\\ntempora quo necessitatibus\\ndolor quam autem quasi\\nreiciendis et nam sapiente accusantium\"\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}posts/1/",
-					"host": [
-						"{{baseUrl}}posts"
-					],
-					"path": [
-						"1",
-						""
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "baseUrl",
-			"value": "https://jsonplaceholder.typicode.com/",
-			"type": "string"
-		},
-		{
-			"key": "email",
-			"value": "homer@test.com",
-			"type": "string",
-			"disabled": true
-		},
-		{
-			"key": "name",
-			"value": "Homer Simpson",
-			"type": "string",
-			"disabled": true
-		}
-	]
+  "info": {
+    "_postman_id": "5b265fbc-74b0-4cd3-93a4-bf1e4045c83b",
+    "name": "RoadToTriggeriseAPI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "10199294"
+  },
+  "item": [
+    {
+      "name": "Add a comment",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//test success response",
+              "pm.test(\"Validate Status code and string\", function () {",
+              "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+              "    pm.response.to.have.status(\"Created\");",
+              "    pm.response.to.not.have.status(404);",
+              "    pm.response.to.not.have.status(400);",
+              "    pm.response.to.not.have.status(500);",
+              "});",
+              "",
+              "pm.test(\"Validate the info of the body\",() => {",
+              "  pm.expect(pm.response.text()).to.include(\"name\");",
+              "  pm.expect(pm.response.text()).to.include(\"email\");",
+              "  pm.expect(pm.response.text()).to.include(\"body\");",
+              "  pm.expect(pm.response.text()).to.include(\"Homer Simpson\");",
+              "  pm.expect(pm.response.text()).to.include(\"homer@test.com\");",
+              "  pm.expect(pm.response.text()).to.include(\"I need a beer\");",
+              "});",
+              "",
+              "//test correct data type",
+              "const jsonData = pm.response.json();",
+              "pm.test(\"Test data type of the response\", () => {",
+              "  pm.expect(jsonData).to.be.an(\"object\");",
+              "  pm.expect(jsonData.name).to.be.a(\"string\");",
+              "  pm.expect(jsonData.email).to.be.a(\"string\");",
+              "  pm.expect(jsonData.body).to.be.a(\"string\");",
+              "  pm.expect(jsonData.postId).to.be.a(\"string\");",
+              "  pm.expect(jsonData.id).to.be.a(\"number\");",
+              "});",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "\n{\n    \"name\": \"Homer Simpson\",\n    \"email\": \"homer@test.com\",\n    \"body\": \"I need a beer\"\n  }\n\n  \n  ",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}posts/1/comments",
+          "host": ["{{baseUrl}}posts"],
+          "path": ["1", "comments"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "See all the comments",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//test success response",
+              "pm.test(\"Validate Status code and string\", function () {",
+              "    pm.response.to.have.status(200);",
+              "    pm.response.to.have.status(\"OK\");",
+              "    pm.response.to.not.have.status(404);",
+              "    pm.response.to.not.have.status(400);",
+              "    pm.response.to.not.have.status(500);",
+              "});",
+              "",
+              "//validate body information",
+              "pm.test(\"Validate the info of the body\",() => {",
+              "  pm.expect(pm.response.text()).to.include(\"name\");",
+              "  pm.expect(pm.response.text()).to.include(\"email\");",
+              "  pm.expect(pm.response.text()).to.include(\"body\");",
+              "  pm.expect(pm.response.text()).to.include(\"postId\");",
+              "  pm.expect(pm.response.text()).to.include(\"Id\");",
+              "});",
+              "",
+              "pm.test(\"Validate name in the response\",() => {",
+              "  pm.expect(pm.response.text()).to.include(\"id labore ex et quam laborum\");",
+              "  pm.expect(pm.response.text()).to.include(\"quo vero reiciendis velit similique earum\");",
+              "  pm.expect(pm.response.text()).to.include(\"odio adipisci rerum aut animi\");",
+              "  pm.expect(pm.response.text()).to.include(\"alias odio sit\");",
+              "  pm.expect(pm.response.text()).to.include(\"vero eaque aliquid doloribus et culpa\");",
+              "});",
+              "",
+              "pm.test(\"Validate email in the response\",() => {",
+              "  pm.expect(pm.response.text()).to.include(\"Eliseo@gardner.biz\");",
+              "  pm.expect(pm.response.text()).to.include(\"Jayne_Kuhic@sydney.com\");",
+              "  pm.expect(pm.response.text()).to.include(\"Nikita@garfield.biz\");",
+              "  pm.expect(pm.response.text()).to.include(\"Lew@alysha.tv\");",
+              "  pm.expect(pm.response.text()).to.include(\"Hayden@althea.biz\");",
+              "});",
+              "",
+              "pm.test(\"Validate body in the response\",() => {",
+              "  pm.expect(pm.response.text()).to.include(\"laudantium enim quasi est quidem magnam voluptate ipsam eos\");",
+              "  pm.expect(pm.response.text()).to.include(\"est natus enim nihil est dolore omnis voluptatem numquam\");",
+              "  pm.expect(pm.response.text()).to.include(\"quia molestiae reprehenderit quasi aspernatur\");",
+              "  pm.expect(pm.response.text()).to.include(\"non et atque\");",
+              "  pm.expect(pm.response.text()).to.include(\"harum non quasi et ratione\");",
+              "});",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}posts/1/comments",
+          "host": ["{{baseUrl}}posts"],
+          "path": ["1", "comments"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete comment",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//test success response",
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "    pm.response.to.have.status(\"OK\");",
+              "    pm.response.to.not.have.status(404);",
+              "    pm.response.to.not.have.status(400);",
+              "    pm.response.to.not.have.status(500);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "  {\n        \"postId\": 2,\n        \"id\": 1,\n        \"name\": \"id labore ex et quam laborum\",\n        \"email\": \"Eliseo@gardner.biz\",\n        \"body\": \"laudantium enim quasi est quidem magnam voluptate ipsam eos\\ntempora quo necessitatibus\\ndolor quam autem quasi\\nreiciendis et nam sapiente accusantium\"\n    }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}posts/1/",
+          "host": ["{{baseUrl}}posts"],
+          "path": ["1", ""]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://jsonplaceholder.typicode.com/",
+      "type": "string"
+    },
+    {
+      "key": "email",
+      "value": "homer@test.com",
+      "type": "string",
+      "disabled": true
+    },
+    {
+      "key": "name",
+      "value": "Homer Simpson",
+      "type": "string",
+      "disabled": true
+    }
+  ]
 }
