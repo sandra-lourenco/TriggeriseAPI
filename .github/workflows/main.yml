@@ -1,4 +1,4 @@
-name: Test-Build
+name: API test
 on:
   push:
     branches:
@@ -12,10 +12,10 @@ jobs:
 
 
       # INstall Node on the runner
-      - name: Install Node
+      - name: Use Node.js ${{ matrix.node-version }}      
         uses: actions/setup-node@v1
         with:
-          node-version: "12.x"
+          node-version: "14.x"
 
 
       # Install the newman command line utility and also install the html extra reporter
